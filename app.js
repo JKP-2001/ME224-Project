@@ -202,7 +202,7 @@ app.get('/auth/microsoft/project',
     passport.authenticate('microsoft', { failureRedirect: '/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/secrets');
+        res.redirect('/project');
     });
 
     let port = process.env.PORT;
