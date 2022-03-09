@@ -91,7 +91,8 @@ passport.deserializeUser(function (id, done) {
 passport.use(new MicrosoftStrategy({
     clientID: process.env.MS_CLIENT_ID,
     clientSecret: process.env.VALUE,
-    callbackURL: "https://me224-project.herokuapp.com/auth/microsoft/project",
+    // callbackURL: "https://me224-project.herokuapp.com/auth/microsoft/project",
+    callbackURL:"http://localhost:3000/auth/microsoft/project",
     scope: ['user.read']
 },
     function (accessToken, refreshToken, profile, done) {
@@ -130,7 +131,9 @@ app.get("/project", function (req, res) {
     if (req.isAuthenticated()) {
         Project.find({id:"0"}, (err, users) => {
             res.render("project", {
-                userslist: users
+                userslist: users,
+                member1_email:req.user.email,
+                member1_name:req.user.Name
             });
         })
     }
@@ -140,6 +143,11 @@ app.get("/project", function (req, res) {
 });
 
 
+app.get("/not_found",(req,res)=>{
+    res.render("not_found");
+})
+
+
 app.post("/project", function (req, res) {
     var choice = req.body.choice;
     console.log(choice);
@@ -147,40 +155,46 @@ app.post("/project", function (req, res) {
     const member1_email = req.body.member1_email;
     const member2_name = req.body.member2_name;
     const member2_email = req.body.member2_email;
+    console.log(member1_email);
     console.log(projectlists);
-    User.find({ Name: member1_name},function (err, user) {
-        if(user[0].project_status===true){
-            res.send("Already A Project has been selected.")
+    User.find({ email: req.user.email},function (err, user){
+        try {
+            if(user[0].project_status===true){
+                res.send("Already A Project has been selected.")
+            }
+            else{
+                User.updateMany({email:req.user.email},{project_status:true,project:projectlists[parseInt(choice)-1].topic},function(err){
+                    if(err){
+                        res.send(err);
+                    }
+                    else{
+                        console.log("Success");
+                    }
+                });
+                User.updateMany({email:member2_email},{project_status:true,project:projectlists[parseInt(choice)-1].topic},function(err){
+                    if(err){
+                        res.send(err);
+                    }
+                    else{
+                        console.log("Success");
+                    }
+                });
+    
+                Project.updateMany({topic:projectlists[parseInt(choice)-1].topic},{id:"1"},(err)=>{
+                    if(err){
+                        res.send(err);
+                    }
+                    else{
+                        console.log("Success");
+                    }
+                })
+                res.redirect("/project");
+            }
+            console.log(user);
+        } catch (err) {
+            res.redirect("/not_found");
         }
-        else{
-            User.updateMany({Name:member1_name},{project_status:true,project:projectlists[parseInt(choice)-1].topic},function(err){
-                if(err){
-                    res.send(err);
-                }
-                else{
-                    console.log("Success");
-                }
-            });
-            User.updateMany({Name:member2_name},{project_status:true,project:projectlists[parseInt(choice)-1].topic},function(err){
-                if(err){
-                    res.send(err);
-                }
-                else{
-                    console.log("Success");
-                }
-            });
 
-            Project.updateMany({topic:projectlists[parseInt(choice)-1].topic},{id:"1"},(err)=>{
-                if(err){
-                    res.send(err);
-                }
-                else{
-                    console.log("Success");
-                }
-            })
-            res.redirect("/project");
-        }
-        console.log(user);
     })
     
 
