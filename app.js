@@ -91,8 +91,8 @@ passport.deserializeUser(function (id, done) {
 passport.use(new MicrosoftStrategy({
     clientID: process.env.MS_CLIENT_ID,
     clientSecret: process.env.VALUE,
-    // callbackURL: "https://me224-project.herokuapp.com/auth/microsoft/project",
-    callbackURL:"http://localhost:3000/auth/microsoft/project",
+    callbackURL: "https://me224-project.herokuapp.com/auth/microsoft/project",
+    // callbackURL:"http://localhost:3000/auth/microsoft/project",
     scope: ['user.read']
 },
     function (accessToken, refreshToken, profile, done) {
