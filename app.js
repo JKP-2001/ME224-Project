@@ -198,7 +198,7 @@ app.get("/logout", function (req, res) {
 app.get('/auth/microsoft',
     passport.authenticate('microsoft'));
 
-app.get('/auth/microsoft/secrets',
+app.get('/auth/microsoft/project',
     passport.authenticate('microsoft', { failureRedirect: '/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
