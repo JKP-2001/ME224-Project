@@ -91,7 +91,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new MicrosoftStrategy({
     clientID: process.env.MS_CLIENT_ID,
     clientSecret: process.env.VALUE,
-    callbackURL: "http://localhost:3000/auth/microsoft/secrets",
+    callbackURL: "https://me224-project.herokuapp.com/auth/microsoft/project",
     scope: ['user.read']
 },
     function (accessToken, refreshToken, profile, done) {
@@ -126,10 +126,10 @@ Project.find({id:"0"}, (err, users) => {
 })
 
 
-app.get("/secrets", function (req, res) {
+app.get("/project", function (req, res) {
     if (req.isAuthenticated()) {
         Project.find({id:"0"}, (err, users) => {
-            res.render("secrets", {
+            res.render("project", {
                 userslist: users
             });
         })
@@ -140,7 +140,7 @@ app.get("/secrets", function (req, res) {
 });
 
 
-app.post("/secrets", function (req, res) {
+app.post("/project", function (req, res) {
     var choice = req.body.choice;
     console.log(choice);
     const member1_name = req.body.member1_name;
@@ -178,7 +178,7 @@ app.post("/secrets", function (req, res) {
                     console.log("Success");
                 }
             })
-            res.redirect("/secrets");
+            res.redirect("/project");
         }
         console.log(user);
     })
