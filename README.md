@@ -37,21 +37,31 @@
 
   
 
-- Example Input
-
-    ![image](https://user-images.githubusercontent.com/84286157/176545600-d3ae2771-05bd-4b85-969d-347dc0a28742.png)
-    ![image](https://user-images.githubusercontent.com/84286157/176545698-cd4b7deb-c05d-44da-a284-e822ac1f2550.png)
+- Example Input (**If PDF Is Not Choosen)
+  
+    ![image](https://user-images.githubusercontent.com/84286157/176546111-0fcb9da8-e303-4f88-a508-03597dda4cdd.png)
+    ![image](https://user-images.githubusercontent.com/84286157/176546132-54460e2f-684b-460b-9dea-3d45bf059d5b.png)
 
 
 - Example Response on success **(status code 200)**
   ```javascript
   {
-    "message": "Mail Sent"
+  "msg": "success",
+  "url": ""
   }
   ```
-- Remarks:
-  - The **email-address** must be valid.
+- Example Input (**If PDF Is Not Choosen)
+  
+    ![image](https://user-images.githubusercontent.com/84286157/176546111-0fcb9da8-e303-4f88-a508-03597dda4cdd.png)|
+    ![image](https://user-images.githubusercontent.com/84286157/176546840-233b1299-840e-45a5-b5e5-3a28bad685e5.png)
 
+- Example Response on success **(status code 200)**
+  ```javascript
+  {
+  "msg": "success",
+  "url": "http://localhost:5000/uploads/company/2-48-53-30-6-2022-admit card.pdf"
+  }
+  ```
 
 ### User Model
 - User Model
