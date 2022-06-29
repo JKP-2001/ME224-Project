@@ -40,7 +40,7 @@
 - Example Input
 
     ![image](https://user-images.githubusercontent.com/84286157/176545600-d3ae2771-05bd-4b85-969d-347dc0a28742.png)
-
+    ![image](https://user-images.githubusercontent.com/84286157/176545698-cd4b7deb-c05d-44da-a284-e822ac1f2550.png)
 
 
 - Example Response on success **(status code 200)**
