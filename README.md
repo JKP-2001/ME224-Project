@@ -39,7 +39,8 @@
 
 - Example Input
 
-    [link](./uploads/company/2-7-8-30-6-2022-4-D%20.pdf)
+    ![image](https://user-images.githubusercontent.com/84286157/176545600-d3ae2771-05bd-4b85-969d-347dc0a28742.png)
+
 
 
 - Example Response on success **(status code 200)**
